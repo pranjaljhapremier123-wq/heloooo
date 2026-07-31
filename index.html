@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SockDrop — Rescue. Pool. Upcycle.</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Supabase JS Client Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+
+  <!-- NAVBAR -->
+  <div class="nav-shell">
+    <nav class="navbar glass">
+      <div class="logo">
+        <span class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 2h6v7.5c0 1 .3 1.7 1 2.6l4.5 6c1.4 1.9.1 4.9-2.3 4.9H8c-1.7 0-3-1.3-3-3V6c0-2.2 0-4 2-4z" fill="#04211d"/></svg>
+        </span>
+        SockDrop
+      </div>
+      <div class="nav-links">
+        <a href="#" class="active">Dashboard</a>
+        <a href="#">Micro-Hubs</a>
+        <a href="#">Batches</a>
+      </div>
+      <button class="btn btn-primary btn-sm" id="btn-log-sock">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        Log Orphan Sock
+      </button>
+    </nav>
+  </div>
+
+  <!-- HERO SECTION -->
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <!-- Left: Copy -->
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="dot"></span>Koramangala Micro-Hub · pickup Sunday</div>
+        <h1 class="display">Every lonely sock<br>finds its <span>match</span>.</h1>
+        <p class="body">SockDrop pools orphaned textiles from your street into neighborhood batches, then routes them straight to local upcycling hubs — no single sock left behind.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary">Start a Batch</button>
+          <button class="btn btn-ghost">Find a Micro-Hub</button>
+        </div>
+      </div>
+
+      <!-- Right: Impact Card -->
+      <div class="glass glass-high impact-card">
+        <div class="impact-header">
+          <span class="title-sm">Platform Impact</span>
+          <span class="live-pill"><span class="pulse"></span>LIVE</span>
+        </div>
+        <div class="metrics-row">
+          <div class="metric teal">
+            <div class="num mono" id="metric-rescued">1,420</div>
+            <div class="lbl">Socks Rescued</div>
+          </div>
+          <div class="metric lav">
+            <div class="num mono" id="metric-batches">38</div>
+            <div class="lbl">Active Batches</div>
+          </div>
+          <div class="metric coral">
+            <div class="num mono" id="metric-awaiting">212</div>
+            <div class="lbl">Orphans Awaiting Match</div>
+          </div>
+          <div class="metric">
+            <div class="num mono" id="metric-hubs">14</div>
+            <div class="lbl">Upcycling Hubs</div>
+          </div>
+        </div>
+        <div class="impact-footer">
+          <div class="avatar-stack">
+            <span class="a"></span><span class="a"></span><span class="a"></span>
+          </div>
+          <span class="body" style="margin:0; font-size:13px;">312 neighbors contributing this week</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="glass search-card">
+      <div class="search-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="search-input" placeholder="Search by pattern, fabric, brand or color…">
+        <button class="btn btn-primary btn-sm" id="btn-search">Search</button>
+      </div>
+      <div class="chips">
+        <div class="chip selected" data-filter="Pattern: Striped">Pattern: Striped</div>
+        <div class="chip" data-filter="Fabric: Cotton">Fabric: Cotton</div>
+        <div class="chip" data-filter="Brand: Nike">Brand: Nike</div>
+        <div class="chip" data-filter="Color: Navy">Color: Navy</div>
+        <div class="chip">+ Add filter</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN FEED & SIDEBAR SECTION -->
+  <div class="wrap main-section">
+    <div class="main-grid">
+
+      <!-- Feed Column -->
+      <div class="feed-col">
+        <div class="section-head">
+          <div>
+            <div class="headline">Orphan Feed</div>
+            <div class="sub">Newest single socks near you, sorted by match likelihood</div>
+          </div>
+          <button class="btn btn-ghost btn-sm">Sort: Nearest Hub</button>
+        </div>
+
+        <!-- Dynamic Feed Grid -->
+        <div class="feed-grid" id="feed-grid">
+          <!-- Cards populated via script.js from Supabase -->
+        </div>
+
+        <div class="load-more">
+          <button class="btn btn-ghost" id="btn-load-more">Load more orphans</button>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="glass tracker-card">
+          <div class="tracker-head">
+            <span class="title-sm">Batch Progress</span>
+            <span class="pill hub" style="border-color:rgba(192,132,252,0.4);">Logistics</span>
+          </div>
+          <div class="hub-name">Koramangala 5th Block · Neighborhood Batch #38</div>
+
+          <div class="bin-wrap">
+            <svg width="120" height="100" viewBox="0 0 120 100" fill="none">
+              <path d="M20 30 L100 30 L92 92 Q60 100 28 92 Z" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <path d="M20 30 L100 30" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+              <clipPath id="binClip"><path d="M22 32 L98 32 L91 90 Q60 97 30 90 Z"/></clipPath>
+              <g clip-path="url(#binClip)">
+                <rect x="20" y="47" width="80" height="55" fill="url(#binGrad)" opacity="0.35"/>
+                <g fill="#14B8A6"><path d="M35 55h5v6.5c0 .8.2 1.3.8 2l3.6 4.8c1.1 1.5 0 3.9-1.8 3.9h-6c-1.3 0-2.4-1-2.4-2.4V60c0-1.7 0-3.2 1.6-5z"/></g>
+                <g fill="#C084FC"><path d="M50 60h5v5c0 .6.15 1 .6 1.5l2.7 3.6c.9 1.1 0 2.9-1.4 2.9h-4.6c-1 0-1.8-.75-1.8-1.8v-6.2c0-1.3 0-2.4 1.2-4z"/></g>
+                <g fill="#F43F5E"><path d="M64 52h5v6c0 .7.2 1.2.7 1.9l3.3 4.4c1 1.4 0 3.6-1.6 3.6h-5.5c-1.2 0-2.2-.9-2.2-2.2v-8.7c0-1.6 0-3 1.3-5z"/></g>
+                <g fill="#14B8A6" opacity="0.85"><path d="M78 57h4.5v5.4c0 .6.2 1 .6 1.6l3 4c.9 1.3 0 3.3-1.5 3.3h-5c-1.1 0-2-.8-2-1.9v-7.4c0-1.5 0-2.7 1.2-4.4z"/></g>
+              </g>
+              <defs>
+                <linearGradient id="binGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#14B8A6"/>
+                  <stop offset="100%" stop-color="#C084FC"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <div class="progress-track"><div class="progress-fill"></div></div>
+          <div class="progress-labels"><span><b>75%</b> full</span><span>15 / 20 socks</span></div>
+
+          <div class="need-banner">
+            <span class="n mono">5</span>
+            <span class="t">more socks needed before this batch is picked up</span>
+          </div>
+
+          <div class="eta-row">
+            <span>Next pickup window</span>
+            <b>Sun, 6:00 PM</b>
+          </div>
+        </div>
+
+        <div class="glass contrib-card">
+          <span class="title-sm">Top Contributors</span>
+          <div class="contrib-list">
+            <div class="contrib-row"><span class="dotc" style="background:var(--teal);"></span><b>Anaya R.</b>&nbsp;— 12 socks</div>
+            <div class="contrib-row"><span class="dotc" style="background:var(--lavender);"></span><b>Rohit M.</b>&nbsp;— 9 socks</div>
+            <div class="contrib-row"><span class="dotc" style="background:var(--coral);"></span><b>Fatima S.</b>&nbsp;— 7 socks</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>SockDrop · Rescue orphaned textiles, one match at a time.</footer>
+
+  <!-- External Script -->
+  <script src="script.js"></script>
+</body>
+</html>
