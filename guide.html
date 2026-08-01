@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Stitch AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: #0b0f19; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0;">
+
+    <!-- Navigation Bar -->
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <div style="display: flex; align-items: center; gap: 10px; color: #fff; font-size: 1.2rem; font-weight: bold; cursor: pointer;" onclick="window.location.href='index.html'">
+            <span style="background: #6366f1; padding: 6px 10px; border-radius: 8px;">👕</span> Stitch <span style="color: #818cf8; font-weight: normal;">AI Finder</span>
+        </div>
+        <nav style="display: flex; gap: 30px;">
+            <a href="index.html" style="color: #cbd5e1; text-decoration: none;">Home</a>
+            <a href="#" style="color: #cbd5e1; text-decoration: none;">Find Item</a>
+            <a href="guide.html" style="color: #818cf8; text-decoration: none; font-weight: bold;">How It Works</a>
+        </nav>
+    </header>
+
+    <main style="padding: 60px 20px; max-width: 900px; margin: 0 auto; color: #fff;">
+        <h1 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px; color: #fff;">Comprehensive Guide to Stitch AI</h1>
+        <p style="text-align: center; color: #94a3b8; font-size: 1.1rem; margin-bottom: 50px;">
+            Learn how our AI-powered lost and found platform connects missing items with their rightful owners using visual and descriptive matching.
+        </p>
+
+        <!-- Guide Steps -->
+        <div style="display: flex; flex-direction: column; gap: 30px;">
+            
+            <!-- Step 1 -->
+            <div style="background: #111827; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <div style="background: #6366f1; color: #fff; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.2rem; font-weight: bold;">1</div>
+                    <h2 style="margin: 0; color: #818cf8;">Upload & Describe Your Item</h2>
+                </div>
+                <p style="color: #cbd5e1; line-height: 1.6;">
+                    Start by providing details about your lost item. You can either upload a photo or write a detailed description. Our system supports various categories such as outerwear, topwear, bottomwear, and footwear. The more specific you are about the brand, size, color, and distinguishing features, the more accurate the AI matching will be.
+                </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div style="background: #111827; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <div style="background: #6366f1; color: #fff; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.2rem; font-weight: bold;">2</div>
+                    <h2 style="margin: 0; color: #818cf8;">AI Processing & Matching</h2>
+                </div>
+                <p style="color: #cbd5e1; line-height: 1.6;">
+                    Once you hit the "Run AI Match Search" button, Stitch AI analyzes your input. The visual recognition algorithm identifies key characteristics from photos, while Natural Language Processing (NLP) parses your text description. It then cross-references this data with our Supabase-powered backend database of found items across multiple locations in real-time.
+                </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div style="background: #111827; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <div style="background: #6366f1; color: #fff; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.2rem; font-weight: bold;">3</div>
+                    <h2 style="margin: 0; color: #818cf8;">Review Matches & Secure Recovery</h2>
+                </div>
+                <p style="color: #cbd5e1; line-height: 1.6;">
+                    The system will display a list of potential matches ranked by confidence score. If you spot your item, you can initiate a secure recovery request. You will be connected with the individual or facility that reported the found item to coordinate its safe return.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Back Button -->
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="index.html" style="display: inline-block; padding: 14px 30px; background: #6366f1; color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; transition: background 0.2s; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);">
+                Return to Home
+            </a>
+        </div>
+    </main>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
