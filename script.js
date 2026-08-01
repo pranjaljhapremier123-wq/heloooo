@@ -3,7 +3,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 // 1. Initialize Supabase with your project URL and Publishable Key
 const supabaseUrl = 'https://ivvsmjyemskgcwgglqng.supabase.co';
-const supabaseKey = 'YOUR_PUBLISHABLE_KEY'; // <-- Paste your actual publishable key here inside the quotes
+const supabaseKey = 'sb_publishable_PWsANh8ITEsZ0YuGkY3Dzw_2KDwwiPA'; // <-- Paste your actual publishable key here inside the quotes
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', () => {
