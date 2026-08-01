@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const previewContainer = document.getElementById('previewContainer');
     const imagePreview = document.getElementById('imagePreview');
     const uploadPrompt = document.getElementById('uploadPrompt');
+    // AUTHENTICATION CHECK: Kick unverified users to the login screen
+const { data: { session } } = await supabase.auth.getSession();
+if (!session) {
+    window.location.replace('login.html');
+}
     const removeImageBtn = document.getElementById('removeImage');
 
     // Make "browse files" text clickable
