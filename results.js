@@ -1,4 +1,9 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+// AUTHENTICATION CHECK: Kick unverified users to the login screen
+const { data: { session } } = await supabase.auth.getSession();
+if (!session) {
+    window.location.replace('login.html');
+}
 
 // 1. Initialize Supabase
 const supabaseUrl = 'https://ivvsmjyemskgcwgglqng.supabase.co';
