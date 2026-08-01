@@ -1,28 +1,27 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-// AUTHENTICATION CHECK: Kick unverified users to the login screen
+
+// 1. Initialize Supabase FIRST
+const supabaseUrl = 'https://ivvsmjyemskgcwgglqng.supabase.co';
+const supabaseKey = 'sb_publishable_PWsANh8ITEsZ0YuGkY3Dzw_2KDwwiPA'; 
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// 2. AUTHENTICATION CHECK (Now it knows what 'supabase' is)
 const { data: { session } } = await supabase.auth.getSession();
 if (!session) {
     window.location.replace('login.html');
 }
-
-// 1. Initialize Supabase
-const supabaseUrl = 'https://ivvsmjyemskgcwgglqng.supabase.co';
-const supabaseKey = 'sb_publishable_PWsANh8ITEsZ0YuGkY3Dzw_2KDwwiPA'; 
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', async () => {
     const resultsGrid = document.getElementById('resultsGrid');
     const loadingSpinner = document.getElementById('loadingSpinner');
     const errorMessage = document.getElementById('errorMessage');
 
-    // Grab the user's search from the URL bar
     const urlParams = new URLSearchParams(window.location.search);
     const category = urlParams.get('category');
     const location = urlParams.get('location');
     const description = urlParams.get('description');
 
     try {
-        // Query the database
         let query = supabase.from('lost_items').select('*');
 
         if (category && category !== 'All Categories') {
@@ -37,21 +36,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const { data, error } = await query;
 
-        // Hide loading text
         loadingSpinner.style.display = 'none';
 
-        // Check for Database Errors!
         if (error) {
             throw error;
         }
 
-        // If no items match
         if (data.length === 0) {
             resultsGrid.innerHTML = '<p style="color: #cbd5e1; grid-column: 1 / -1; text-align: center;">No matching garments found in the database. Please try a broader search.</p>';
             return;
         }
 
-        // Draw the found items on the screen
         data.forEach(item => {
             const card = document.createElement('div');
             card.style.cssText = `
@@ -77,7 +72,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
     } catch (error) {
-        // If there's an error, this prints the exact reason onto the website screen
         console.error('Database Error:', error);
         loadingSpinner.style.display = 'none';
         errorMessage.style.display = 'block';
