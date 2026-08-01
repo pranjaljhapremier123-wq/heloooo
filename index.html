@@ -5,114 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stitch AI - Lost Clothing Finder</title>
     <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body style="background-color: #0b0f19; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0;">
 
-    <!-- Header / Navbar -->
-    <header class="navbar">
-        <div class="logo">
-            <i class="fa-solid fa-shirt"></i>
-            <span>Stitch <small>AI Finder</small></span>
+    <!-- Navigation Bar -->
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+        <div style="display: flex; align-items: center; gap: 10px; color: #fff; font-size: 1.2rem; font-weight: bold;">
+            <span style="background: #6366f1; padding: 6px 10px; border-radius: 8px;">👕</span> Stitch <span style="color: #818cf8; font-weight: normal;">AI Finder</span>
         </div>
-        <nav>
-            <a href="#upload-section" class="active">Find Item</a>
-            <a href="#feed-section">Recent Matches</a>
-            <a href="#how-it-works">How It Works</a>
+        <nav style="display: flex; gap: 30px;">
+            <a href="#" style="color: #cbd5e1; text-decoration: none;">Find Item</a>
+            <a href="#" style="color: #cbd5e1; text-decoration: none;">Recent Matches</a>
+            <a href="#how-it-works" style="color: #cbd5e1; text-decoration: none;">How It Works</a>
         </nav>
     </header>
 
-    <!-- Main Container -->
-    <main class="container">
-        
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Lost a Garment? Let AI Track It Down.</h1>
-            <p>Upload a photo or describe your lost clothing item. Stitch AI matches lost articles with found inventories instantly.</p>
-        </section>
+    <!-- Hero / Matcher Section -->
+    <main style="padding: 40px 20px; max-width: 800px; margin: 0 auto; text-align: center;">
+        <h1 style="color: #fff; font-size: 2.5rem; margin-bottom: 10px;">Lost a Garment? Let AI Track It Down.</h1>
+        <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 40px;">Upload a photo or describe your lost clothing item. Stitch AI matches lost articles with found inventories instantly.</p>
 
-        <!-- Upload & Search Section -->
-        <section id="upload-section" class="card upload-card">
-            <h2><i class="fa-solid fa-wand-magic-sparkles"></i> AI Visual & Description Matcher</h2>
+        <!-- Form Card -->
+        <div style="background: #111827; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 30px; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+            <h3 style="color: #fff; margin-top: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">✨ AI Visual & Description Matcher</h3>
             
-            <div class="drop-zone" id="dropZone">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-                <p>Drag & drop your clothing photo here, or <span>browse files</span></p>
-                <input type="file" id="fileInput" accept="image/*" hidden>
+            <!-- Upload Box -->
+            <div style="border: 2px dashed rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 30px; text-align: center; margin-bottom: 25px; background: rgba(255, 255, 255, 0.01);">
+                <div style="font-size: 2rem; margin-bottom: 10px;">☁️</div>
+                <p style="color: #cbd5e1; margin: 0;">Drag & drop your clothing photo here, or <span style="color: #818cf8; cursor: pointer;">browse files</span></p>
             </div>
 
-            <div class="preview-container" id="previewContainer" style="display: none;">
-                <img id="imagePreview" src="" alt="Uploaded Preview">
-                <button id="removeImage" class="btn-secondary">Remove Photo</button>
+            <!-- Inputs -->
+            <div style="margin-bottom: 20px;">
+                <label style="color: #94a3b8; font-size: 0.9rem; display: block; margin-bottom: 8px;">Item Description & Details</label>
+                <input type="text" id="description" placeholder="E.g., Blue denim jacket with silver buttons, size M, lost near Central Park" style="width: 100%; padding: 12px 16px; background: #1f2937; border: 1px solid #374151; border-radius: 8px; color: #fff; box-sizing: border-box;">
             </div>
 
-            <div class="form-group">
-                <label for="itemDescription">Item Description & Details</label>
-                <input type="text" id="itemDescription" placeholder="e.g., Blue denim jacket with silver buttons, size M, lost near Central Park">
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="itemCategory">Category</label>
-                    <select id="itemCategory">
-                        <option value="all">All Categories</option>
-                        <option value="outerwear">Outerwear & Jackets</option>
-                        <option value="tops">Tops & Shirts</option>
-                        <option value="bottoms">Pants & Bottoms</option>
-                        <option value="accessories">Accessories</option>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                <div>
+                    <label style="color: #94a3b8; font-size: 0.9rem; display: block; margin-bottom: 8px;">Category</label>
+                    <select id="category" style="width: 100%; padding: 12px 16px; background: #1f2937; border: 1px solid #374151; border-radius: 8px; color: #fff; box-sizing: border-box;">
+                        <option>All Categories</option>
+                        <option>Outerwear</option>
+                        <option>Topwear</option>
+                        <option>Bottomwear</option>
+                        <option>Footwear & Accessories</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="locationLost">Location Lost</label>
-                    <input type="text" id="locationLost" placeholder="e.g., Downtown / Transit / Venue">
+                <div>
+                    <label style="color: #94a3b8; font-size: 0.9rem; display: block; margin-bottom: 8px;">Location Lost</label>
+                    <input type="text" id="location" placeholder="E.g., Downtown / Transit / Venue" style="width: 100%; padding: 12px 16px; background: #1f2937; border: 1px solid #374151; border-radius: 8px; color: #fff; box-sizing: border-box;">
                 </div>
             </div>
 
-            <button id="searchBtn" class="btn-primary">
-                <i class="fa-solid fa-magnifying-glass"></i> Run AI Match Search
+            <button id="submit-btn" style="width: 100%; padding: 14px; background: #6366f1; color: #fff; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background 0.2s;">
+                🔍 Run AI Match Search
             </button>
-        </section>
-
-        <!-- Loading Indicator -->
-        <div id="loadingSpinner" class="loading-spinner" style="display: none;">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-            <p>Stitch AI is scanning global found databases...</p>
         </div>
-
-        <!-- Results Feed Section -->
-        <section id="feed-section" class="results-section">
-            <h3>Potential Matches Found</h3>
-            <div class="grid-container" id="resultsGrid">
-                <!-- Dynamic cards populated via JavaScript -->
-                <div class="result-card">
-                    <img src="https://images.unsplash.com/photo-1543076447-215ad9ba6923?auto=format&fit=crop&w=500&q=80" alt="Sample Match">
-                    <div class="card-body">
-                        <span class="badge match-high">98% Match</span>
-                        <h4>Blue Denim Jacket</h4>
-                        <p><i class="fa-solid fa-location-dot"></i> Central Station Lost & Found</p>
-                        <button class="btn-sm">Claim Item</button>
-                    </div>
-                </div>
-                <div class="result-card">
-                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=500&q=80" alt="Sample Match">
-                    <div class="card-body">
-                        <span class="badge match-med">85% Match</span>
-                        <h4>Vintage Blue Trucker Jacket</h4>
-                        <p><i class="fa-solid fa-location-dot"></i> City Park Depot</p>
-                        <button class="btn-sm">Claim Item</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Stitch AI Lost Clothing Finder. Open Source GitHub Project.</p>
-    </footer>
+    <!-- How It Works Section -->
+    <section id="how-it-works" style="padding: 60px 20px; color: #fff; max-width: 900px; margin: 0 auto;">
+        <h2 style="text-align: center; font-size: 2rem; margin-bottom: 20px;">How Stitch AI Works</h2>
+        <p style="text-align: center; color: #94a3b8; margin-bottom: 40px; font-size: 1.1rem;">
+            Stitch AI is an intelligent lost clothing finder designed to quickly connect people who have lost garments with found inventories using advanced description and tracking.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div style="background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="color: #818cf8; margin-bottom: 10px;">1. Describe Your Item</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">Enter precise details like category, brand, colour, location lost, and date to build a comprehensive profile of your missing garment.</p>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="color: #818cf8; margin-bottom: 10px;">2. Secure Storage</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">Your report is securely logged into our Supabase backend database (`lost_items`) instantly for real-time tracking.</p>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <h3 style="color: #818cf8; margin-bottom: 10px;">3. Find & Match</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">Browse recent matches or let our system cross-reference listings to help you recover your clothing efficiently.</p>
+            </div>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
 </body>
 </html>
